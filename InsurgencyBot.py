@@ -1,9 +1,12 @@
 import praw
 import reddit
+import re
 from urllib.parse import quote_plus
 
 # Create a list of keywords to search
 key_word_list = ['Steyr', 'AUG', 'What do you think ', 'The game is ', 'I like the game ', 'CPU issues ', 'weapons ', 'game issues']
+# Create a list of keywords for CPU issues
+keywords_cpu = ['CPU']
 
 
 # Create a dictionary to store different categories of comments
@@ -21,8 +24,14 @@ def getHotComments(user_sub_limit):
     subreddit = reddit_api.subreddit("insurgency")
 
     for submission in subreddit.hot(limit=user_sub_limit):
-        for title_term in key_word_list:
-            if title_term in submission.title:
+        for comment in submission.comments:
+            for title_term in key_word_list:
+                if len(comment.body.lower()) > 5 or len(submission.title) > 5:
+                     if title_term in submission.title:
+                        if hasattr(comment, "body"):
+                             print("Title: ", submission.title)
+                             print("Comment: ", comment.body)
+                             print("-------------------------")
 
 
 
