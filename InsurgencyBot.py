@@ -7,6 +7,8 @@ from urllib.parse import quote_plus
 key_word_list = ['Steyr', 'AUG', 'What do you think ', 'The game is ', 'I like the game ', 'CPU issues ', 'weapons ', 'game issues']
 # Create a list of keywords for CPU issues
 keywords_cpu = ['CPU']
+opinion_keywords = ["What's your opinion of the game? ", "What's your thought's on the game?", "How good is this game?",
+                    ]
 
 
 # Create a dictionary to store different categories of comments
@@ -28,7 +30,13 @@ def getHotComments(user_sub_limit):
         comment_queue = submission.comments[:]
         while comment_queue:
             comment = comment_queue.pop(0)
-            print(comment.body)
+            for opinion in opinion_keywords:
+                if opinion in comment.body:
+                    print(comment.body)
+                else:
+                    break
+
+           # print(comment.body)
             comment_queue.extend(comment.replies)
 
     return ''
