@@ -24,15 +24,32 @@ def getHotComments(user_sub_limit):
     subreddit = reddit_api.subreddit("insurgency")
 
     for submission in subreddit.hot(limit=user_sub_limit):
-        for comment in submission.comments:
-          
-
-
+        submission.comments.replace_more(limit=None)
+        comment_queue = submission.comments[:]
+        while comment_queue:
+            comment = comment_queue.pop(0)
+            print(comment.body)
+            comment_queue.extend(comment.replies)
 
     return ''
 
+def getTopComments(user_sub_limit):
+    reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
+                             client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
+                             user_agent='<happy:q:1.0>')
+    subreddit = reddit_api.subreddit("insurgency")
 
+    for submission in subreddit.top(limit=user_sub_limit):
+        submission.comments.replace_more(limit=None)
+        comment_queue = submission.comments[:]
+        while comment_queue:
+            comment = comment_queue.pop(0)
+            print("Comment: ")
+            print(comment.body)
+            comment_queue.extend(comment.replies)
+            print("--------------------")
 
+    return ''
 
 def main():
 
@@ -48,8 +65,11 @@ def main():
     # Ask the user for the number of submissions to be searched
     user_sub_limit = int(input("Enter the desired number of submissions to be searched: "))
 
-    if user_topic == 'hot':
+    if user_topic == 'hot'.lower():
         print(getHotComments(user_sub_limit))
+    elif user_topic == 'top'.lower():
+        print(getTopComments(user_sub_limit))
+
 
 main()
 
