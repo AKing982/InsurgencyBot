@@ -8,7 +8,7 @@ key_word_list = ['Steyr', 'AUG', 'What do you think ', 'The game is ', 'I like t
 # Create a list of keywords for CPU issues
 keywords_cpu = ['CPU']
 opinion_keywords = ["What's your opinion of the game? ", "What's your thought's on the game?", "How good is this game?",
-                    ]
+                  "how amazing is the game"]
 
 
 # Create a dictionary to store different categories of comments
@@ -31,7 +31,7 @@ def getHotComments(user_sub_limit):
         while comment_queue:
             comment = comment_queue.pop(0)
             for opinion in opinion_keywords:
-                if opinion in comment.body:
+                if opinion.lower() in comment.body:
                     print(comment.body)
                 else:
                     break
