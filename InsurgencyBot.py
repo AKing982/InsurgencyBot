@@ -3,7 +3,7 @@ import reddit
 from urllib.parse import quote_plus
 
 # Create a list of keywords to search
-key_word_list = []
+key_word_list = ['Steyr', 'AUG', 'What do you think ', 'The game is ', 'I like the game ', 'CPU issues ']
 
 # Create a dictionary to store different categories of comments
 comment_categories = {'FPS Issues: ': [],
