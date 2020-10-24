@@ -8,7 +8,7 @@ class RedditBotTest(unittest.TestCase):
 
         # Test that the length of the list is equal to 6
         self.assertEqual(len(self.list), 6)
-
+        self.assert
 
 if __name__ == '__main__':
     unittest.main()
