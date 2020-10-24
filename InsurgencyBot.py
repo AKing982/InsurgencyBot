@@ -3,7 +3,8 @@ import reddit
 from urllib.parse import quote_plus
 
 # Create a list of keywords to search
-key_word_list = ['Steyr', 'AUG', 'What do you think ', 'The game is ', 'I like the game ', 'CPU issues ']
+key_word_list = ['Steyr', 'AUG', 'What do you think ', 'The game is ', 'I like the game ', 'CPU issues ', 'weapons ', 'game issues']
+
 
 # Create a dictionary to store different categories of comments
 comment_categories = {'FPS Issues: ': [],
@@ -11,6 +12,24 @@ comment_categories = {'FPS Issues: ': [],
                       'CPU Issues: ': [],
                       'Opinions: ': [],
                       'Steyr Aug: ': []}
+
+
+def getHotComments(user_sub_limit):
+    reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
+                             client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
+                             user_agent='<happy:q:1.0>')
+    subreddit = reddit_api.subreddit("insurgency")
+
+    for submission in subreddit.hot(limit=user_sub_limit):
+        for title_term in key_word_list:
+            if title_term in submission.title:
+
+
+
+    return ''
+
+
+
 
 def main():
 
@@ -24,33 +43,11 @@ def main():
     user_topic = input("Enter the topic to be searched: ")
 
     # Ask the user for the number of submissions to be searched
-    user_sub_limit = input("Enter the desired number of submissions to be searched: ")
+    user_sub_limit = int(input("Enter the desired number of submissions to be searched: "))
 
-    if user_topic == 'hot' or user_topic == 'Hot':
-        print(getHotComments(user_topic, user_sub_limit))
-    elif user_topic == 'top' or user_topic == 'Top':
-        print(getTopComments(user_topic, user_sub_limit))
-    elif user_topic == 'Rising' or user_topic == 'rising':
-        print(getRisingComments(user_topic, user_sub_limit))
-    elif user_topic == 'new' or user_topic == 'New':
-        print(getNewComments(user_topic, user_sub_limit))
-        
+    if user_topic == 'hot':
+        print(getHotComments(user_sub_limit))
+
+main()
 
 
-
-
-
-
-
-def getHotComments(user_topic, user_sub_limit):
-
-def getNewComments(user_topic, user_sub_limit):
-
-def getRisingComments(user_topic, user_sub_limit):
-
-def getTopComments(user_topic, user_sub_limit):
-
-
-if "__name__" == "__main__":
-    main()
-    
