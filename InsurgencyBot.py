@@ -4,11 +4,11 @@ import re
 from urllib.parse import quote_plus
 
 # Create a list of keywords to search
-key_word_list = ['Steyr', 'AUG', 'What do you think ', 'The game is ', 'I like the game ', 'CPU issues ', 'weapons ', 'game issues']
+key_word_list = ['Steyr', 'AUG', 'What do', 'The game is', 'I like', 'CPU issues ', 'weapons ', 'game issues']
 # Create a list of keywords for CPU issues
 keywords_cpu = ['CPU']
-opinion_keywords = ["What's your opinion of the game? ", "What's your thought's on the game?", "How good is this game?",
-                  "how amazing is the game"]
+opinion_keywords = ["What's your thoughts", "How do you think of", "How good is the game",
+                  "how amazing is the game", "opinions", "Is sandstorm worth buying", "worth buying", "issues with game"]
 
 
 # Create a dictionary to store different categories of comments
@@ -30,11 +30,10 @@ def getHotComments(user_sub_limit):
         comment_queue = submission.comments[:]
         while comment_queue:
             comment = comment_queue.pop(0)
-            for opinion in opinion_keywords:
-                if opinion.lower() in comment.body:
+            for words in opinion_keywords:
+                if words.lower() in comment.body:
                     print(comment.body)
-                else:
-                    break
+
 
            # print(comment.body)
             comment_queue.extend(comment.replies)
@@ -52,12 +51,18 @@ def getTopComments(user_sub_limit):
         comment_queue = submission.comments[:]
         while comment_queue:
             comment = comment_queue.pop(0)
-            print("Comment: ")
-            print(comment.body)
+            for words in opinion_keywords:
+                if words.lower() in comment.body:
+                    print(comment.body)
+
+
+           # print(comment.body)
             comment_queue.extend(comment.replies)
-            print("--------------------")
 
     return ''
+
+
+
 
 def main():
 
