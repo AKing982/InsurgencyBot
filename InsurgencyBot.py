@@ -25,13 +25,7 @@ def getHotComments(user_sub_limit):
 
     for submission in subreddit.hot(limit=user_sub_limit):
         for comment in submission.comments:
-            for title_term in key_word_list:
-                if len(comment.body.lower()) > 5 or len(submission.title) > 5:
-                     if title_term in submission.title:
-                        if hasattr(comment, "body"):
-                             print("Title: ", submission.title)
-                             print("Comment: ", comment.body)
-                             print("-------------------------")
+          
 
 
 
