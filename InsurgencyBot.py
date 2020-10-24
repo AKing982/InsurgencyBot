@@ -61,6 +61,47 @@ def getTopComments(user_sub_limit):
 
     return ''
 
+def getRisingComments(user_sub_limit):
+    reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
+                             client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
+                             user_agent='<happy:q:1.0>')
+    subreddit = reddit_api.subreddit("insurgency")
+
+    for submission in subreddit.rising(limit=user_sub_limit):
+        submission.comments.replace_more(limit=None)
+        comment_queue = submission.comments[:]
+        while comment_queue:
+            comment = comment_queue.pop(0)
+            for words in opinion_keywords:
+                if words.lower() in comment.body:
+                    print(comment.body)
+
+
+           # print(comment.body)
+            comment_queue.extend(comment.replies)
+
+    return ''
+
+def getNewComments(user_sub_limit):
+    reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
+                             client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
+                             user_agent='<happy:q:1.0>')
+    subreddit = reddit_api.subreddit("insurgency")
+
+    for submission in subreddit.new(limit=user_sub_limit):
+        submission.comments.replace_more(limit=None)
+        comment_queue = submission.comments[:]
+        while comment_queue:
+            comment = comment_queue.pop(0)
+            for words in opinion_keywords:
+                if words.lower() in comment.body:
+                    print(comment.body)
+
+
+           # print(comment.body)
+            comment_queue.extend(comment.replies)
+
+    return ''
 
 
 
@@ -82,6 +123,10 @@ def main():
         print(getHotComments(user_sub_limit))
     elif user_topic == 'top'.lower():
         print(getTopComments(user_sub_limit))
+    elif user_topic == 'rising'.lower():
+        print(getRisingComments(user_sub_limit))
+    elif user_topic == 'new'.lower():
+        print(getNewComments(user_sub_limit))
 
 
 main()
