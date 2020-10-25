@@ -6,7 +6,7 @@ from urllib.parse import quote_plus
 # Create a list of keywords to search
 key_word_list = ['Steyr', 'AUG', 'What do', 'The game is', 'I like', 'CPU issues ', 'weapons ', 'game issues']
 # Create a list of keywords for CPU issues
-keywords_cpu = ['CPU']
+
 opinion_keywords = ["What's your thoughts", "How do you think of", "How good is the game",
                   "how amazing is the game", "opinions", "Is sandstorm worth buying", "worth buying", "issues with game"]
 
