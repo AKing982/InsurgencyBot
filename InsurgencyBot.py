@@ -10,6 +10,8 @@ key_word_list = ['Steyr', 'AUG', 'What do', 'The game is', 'I like', 'CPU issues
 opinion_keywords = ["What's your thoughts", "How do you think of", "How good is the game",
                   "how amazing is the game", "opinions", "Is sandstorm worth buying", "worth buying", "issues with game"]
 
+steyr_aug_keywords = ['Steyr', 'AUG', 'steyr', 'aug']
+
 
 # Create a dictionary to store different categories of comments
 comment_categories = {'FPS Issues: ': [],
