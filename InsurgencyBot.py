@@ -21,7 +21,7 @@ comment_categories = {'FPS Issues: ': [],
                       'Steyr Aug: ': []}
 
 
-def getHotComments(user_sub_limit):
+def getHotComments(user_sub_limit, user_question):
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
                              client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
                              user_agent='<happy:q:1.0>')
@@ -32,9 +32,12 @@ def getHotComments(user_sub_limit):
         comment_queue = submission.comments[:]
         while comment_queue:
             comment = comment_queue.pop(0)
-            for words in opinion_keywords:
-                if words.lower() in comment.body:
-                    print(comment.body)
+            if len(comment.body) > 5:
+                comment_body = comment.body.lower()
+                for words in steyr_aug_keywords:
+                    if words.lower() in comment_body:
+                        print(comment.body)
+
 
 
            # print(comment.body)
@@ -42,7 +45,7 @@ def getHotComments(user_sub_limit):
 
     return ''
 
-def getTopComments(user_sub_limit):
+def getTopComments(user_sub_limit, user_question):
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
                              client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
                              user_agent='<happy:q:1.0>')
@@ -53,9 +56,10 @@ def getTopComments(user_sub_limit):
         comment_queue = submission.comments[:]
         while comment_queue:
             comment = comment_queue.pop(0)
-            for words in opinion_keywords:
+            for words in steyr_aug_keywords:
                 if words.lower() in comment.body:
                     print(comment.body)
+
 
 
            # print(comment.body)
@@ -63,7 +67,7 @@ def getTopComments(user_sub_limit):
 
     return ''
 
-def getRisingComments(user_sub_limit):
+def getRisingComments(user_sub_limit, user_question):
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
                              client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
                              user_agent='<happy:q:1.0>')
@@ -73,18 +77,18 @@ def getRisingComments(user_sub_limit):
         submission.comments.replace_more(limit=None)
         comment_queue = submission.comments[:]
         while comment_queue:
+            print(submission.title)
             comment = comment_queue.pop(0)
             for words in opinion_keywords:
                 if words.lower() in comment.body:
                     print(comment.body)
-
 
            # print(comment.body)
             comment_queue.extend(comment.replies)
 
     return ''
 
-def getNewComments(user_sub_limit):
+def getNewComments(user_sub_limit, user_question):
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
                              client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
                              user_agent='<happy:q:1.0>')
@@ -121,14 +125,17 @@ def main():
     # Ask the user for the number of submissions to be searched
     user_sub_limit = int(input("Enter the desired number of submissions to be searched: "))
 
+    # Ask the user what issue they want to search
+    user_question = input('Enter the desired issue to be searched: ')
+
     if user_topic == 'hot'.lower():
-        print(getHotComments(user_sub_limit))
+        print(getHotComments(user_sub_limit, user_question))
     elif user_topic == 'top'.lower():
-        print(getTopComments(user_sub_limit))
+        print(getTopComments(user_sub_limit, user_question))
     elif user_topic == 'rising'.lower():
-        print(getRisingComments(user_sub_limit))
+        print(getRisingComments(user_sub_limit, user_question))
     elif user_topic == 'new'.lower():
-        print(getNewComments(user_sub_limit))
+        print(getNewComments(user_sub_limit, user_question))
 
 
 main()
