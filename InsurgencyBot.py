@@ -6,11 +6,16 @@ from urllib.parse import quote_plus
 # Create a list of keywords to search
 key_word_list = ['Steyr', 'AUG', 'What do', 'The game is', 'I like', 'CPU issues ', 'weapons ', 'game issues']
 # Create a list of keywords for CPU issues
+cpu_issues_keywords = ['cpu issues', 'cpu performance', 'cpu problems', 'cpu bottleneck']
+
+gpu_issues_keywords = ['gpu issues', 'gpu performance', 'gpu problems', 'gpu bottleneck']
 
 opinion_keywords = ["What's your thoughts", "How do you think of", "How good is the game",
                   "how amazing is the game", "opinions", "Is sandstorm worth buying", "worth buying", "issues with game"]
 
 steyr_aug_keywords = ['Steyr', 'AUG', 'steyr', 'aug']
+
+
 
 
 # Create a dictionary to store different categories of comments
@@ -34,9 +39,27 @@ def getHotComments(user_sub_limit, user_question):
             comment = comment_queue.pop(0)
             if len(comment.body) > 5:
                 comment_body = comment.body.lower()
-                for words in steyr_aug_keywords:
-                    if words.lower() in comment_body:
-                        print(comment.body)
+                # If the user_question is about cpu issues get comments relating to cpu issues
+                if user_question in cpu_issues_keywords:
+                    print("Submission: ", submission.title)
+                    print("Comments")
+                    print("---------")
+                    print(comment.body)
+                    print()
+
+                # Else if the user_question is about fps issues get comments relating to fps issues
+                if user_question in opinion_keywords:
+                    print("Submission: ", submission.title)
+                    print("Comments")
+                    print("---------")
+                    print(comment.body)
+                    print()
+
+                # Else if the user_question is about gpu issues get comments relating to gpu issues
+
+                # Else if the user_question is about opinions of the game get comments relating to opinions
+
+
 
 
 
