@@ -125,17 +125,6 @@ def getNewComments(user_sub_limit, user_question):
 
     return ''
 
-def main():
-
-    reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
-                     client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
-                     user_agent='<happy:q:1.0>')
-
-    subreddit = reddit_api.subreddit("insurgency")
-
-    getUserInfo()
-
-
 def getUserInfo():
     # Ask the user for the topic, i.e. hot, top, new
     user_topic = input("Enter the topic to be searched: ")
@@ -152,7 +141,20 @@ def getUserInfo():
     elif user_topic == 'new'.lower():
         print(getNewComments(user_sub_limit, user_question))
 
+def main():
 
-main()
+    reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
+                     client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
+                     user_agent='<happy:q:1.0>')
+
+    subreddit = reddit_api.subreddit("insurgency")
+
+    getUserInfo()
+
+
+
+if "__name__" == "__main__":
+
+ main()
 
 
