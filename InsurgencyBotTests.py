@@ -1,11 +1,13 @@
 import unittest
 import pytest
 
-class RedditBotTest(pytest.PytestAssertRewriteWarning):
+class RedditBotTest(unittest.TestCase):
 
     # Test the list
     def testList(self):
         self.list = ['Steyr', 'AUG', 'What do you think ', 'The game is ', 'I like the game ', 'CPU issues ']
+
+    
 
 
 
