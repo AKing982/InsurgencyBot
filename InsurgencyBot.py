@@ -11,6 +11,9 @@ key_word_list = ['Steyr', 'AUG', 'What do', 'The game is', 'I like', 'CPU issues
 opinion_keywords = ["What's your thoughts", "How do you think of", "How good is the game",
                   "how amazing is the game", "opinions", "Is sandstorm worth buying", "worth buying", "issues with game"]
 
+sys_requirements = ["system requirements", "system specs", "pc specs", "PC Specs", "hardware", "memory", "gpu", "cpu",
+                    "motherboard", "RAM", "ram", "i7", "rtx"]
+
 def getHotComments():
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
                              client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
@@ -23,6 +26,19 @@ def getHotComments():
         comment_queue = submission.comments[:]
         while comment_queue:
             comment = comment_queue.pop(0)
+
+            # If the comment has 5 or more words
+            if len(comment.body) > 5:
+                comment_body = comment.body.lower()
+
+                # For each comment get those that have phrases in sys_requirements
+                if any(question in comment_body for question in sys_requirements):
+                    print("Submission: ", submission.title)
+                    print("Comments")
+                    print("--------")
+                    print(comment.body)
+                    print()
+
 
            # print(comment.body)
             comment_queue.extend(comment.replies)
@@ -88,6 +104,9 @@ def main():
                      user_agent='<happy:q:1.0>')
 
     subreddit = reddit_api.subreddit("insurgency")
+
+    print(getHotComments())
+
 
 main()
 
