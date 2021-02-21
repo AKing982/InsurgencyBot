@@ -24,7 +24,7 @@ comment_categories = {'FPS Issues: ': [],
                       'Steyr Aug: ': []}
 
 
-def getHotComments(user_sub_limit, user_question):
+def get_hot_comments(user_sub_limit, user_question):
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
                              client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
                              user_agent='<happy:q:1.0>')
@@ -63,7 +63,8 @@ def getHotComments(user_sub_limit, user_question):
 
     return ''
 
-def getTopComments(user_sub_limit, user_question):
+
+def get_top_comments(user_sub_limit, user_question):
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
                              client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
                              user_agent='<happy:q:1.0>')
@@ -83,7 +84,8 @@ def getTopComments(user_sub_limit, user_question):
 
     return ''
 
-def getRisingComments(user_sub_limit, user_question):
+
+def get_rising_comments(user_sub_limit, user_question):
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
                              client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
                              user_agent='<happy:q:1.0>')
@@ -104,7 +106,8 @@ def getRisingComments(user_sub_limit, user_question):
 
     return ''
 
-def getNewComments(user_sub_limit, user_question):
+
+def get_new_comments(user_sub_limit, user_question):
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
                              client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
                              user_agent='<happy:q:1.0>')
@@ -125,7 +128,8 @@ def getNewComments(user_sub_limit, user_question):
 
     return ''
 
-def getUserInfo():
+
+def get_user_info():
     # Ask the user for the topic, i.e. hot, top, new
     user_topic = input("Enter the topic to be searched: ")
     # Ask the user for the number of submissions to be searched
@@ -135,11 +139,12 @@ def getUserInfo():
     if user_topic == 'hot'.lower():
         print(getHotComments(user_sub_limit, user_question))
     elif user_topic == 'top'.lower():
-        print(getTopComments(user_sub_limit, user_question))
+        print(gettopcomments(user_sub_limit, user_question))
     elif user_topic == 'rising'.lower():
         print(getRisingComments(user_sub_limit, user_question))
     elif user_topic == 'new'.lower():
-        print(getNewComments(user_sub_limit, user_question))
+        print(get_new_comments(user_sub_limit, user_question))
+
 
 def main():
 
@@ -149,12 +154,11 @@ def main():
 
     subreddit = reddit_api.subreddit("insurgency")
 
-    getUserInfo()
-
+    get_user_info()
 
 
 if "__name__" == "__main__":
 
- main()
+    main()
 
 
