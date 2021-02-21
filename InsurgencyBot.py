@@ -11,8 +11,9 @@ cpu_issues_keywords = ['cpu issues', 'cpu performance', 'cpu problems', 'cpu bot
 
 gpu_issues_keywords = ['gpu issues', 'gpu performance', 'gpu problems', 'gpu bottleneck']
 
-opinion_keywords = ["What's your thoughts", "How do you think of", "How good is the game",
-                  "how amazing is the game", "opinions", "Is sandstorm worth buying", "worth buying", "issues with game"]
+opinion_keywords = ["What's your thoughts", "How do you think of", "How good is the game", "how amazing is the game",
+                    "opinions", "Is sandstorm worth buying",
+                    "worth buying", "issues with game"]
 
 steyr_aug_keywords = ['Steyr', 'AUG', 'steyr', 'aug']
 
@@ -58,7 +59,8 @@ def get_hot_comments(user_sub_limit, user_question):
 
                 # Else if the user_question is about opinions of the game get comments relating to opinions
 
-           # print(comment.body)
+            # print(comment.body)
+
             comment_queue.extend(comment.replies)
 
     return ''
@@ -79,7 +81,7 @@ def get_top_comments(user_sub_limit, user_question):
                 if words.lower() in comment.body:
                     print(comment.body)
 
-           # print(comment.body)
+            # print(comment.body)
             comment_queue.extend(comment.replies)
 
     return ''
@@ -101,7 +103,7 @@ def get_rising_comments(user_sub_limit, user_question):
                 if words.lower() in comment.body:
                     print(comment.body)
 
-           # print(comment.body)
+            # print(comment.body)
             comment_queue.extend(comment.replies)
 
     return ''
@@ -122,8 +124,7 @@ def get_new_comments(user_sub_limit, user_question):
                 if words.lower() in comment.body:
                     print(comment.body)
 
-
-           # print(comment.body)
+            # print(comment.body)
             comment_queue.extend(comment.replies)
 
     return ''
@@ -137,20 +138,19 @@ def get_user_info():
     # Ask the user what issue they want to search
     user_question = input('Enter the desired issue to be searched: ')
     if user_topic == 'hot'.lower():
-        print(getHotComments(user_sub_limit, user_question))
+        print(get_hot_comments(user_sub_limit, user_question))
     elif user_topic == 'top'.lower():
-        print(gettopcomments(user_sub_limit, user_question))
+        print(get_top_comments(user_sub_limit, user_question))
     elif user_topic == 'rising'.lower():
-        print(getRisingComments(user_sub_limit, user_question))
+        print(get_rising_comments(user_sub_limit, user_question))
     elif user_topic == 'new'.lower():
         print(get_new_comments(user_sub_limit, user_question))
 
 
 def main():
-
     reddit_api = praw.Reddit(client_id='sWoQ6hSvdJueiw',
-                     client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
-                     user_agent='<happy:q:1.0>')
+                             client_secret='4JYNsj4ZgzxL1gFSfbjeB2yFMLA',
+                             user_agent='<happy:q:1.0>')
 
     subreddit = reddit_api.subreddit("insurgency")
 
@@ -158,7 +158,4 @@ def main():
 
 
 if "__name__" == "__main__":
-
     main()
-
-
